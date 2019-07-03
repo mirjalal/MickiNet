@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+//gradle.projectsEvaluated {
+//    tasks.withType(JavaType) {
+//        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+//    }
+//}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        applicationId "com.talmir.mickinet"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            useProguard false
+            jniDebuggable true
+            renderscriptDebuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            multiDexEnabled true // optional: enable in debug mode
+        }
+        release {
+            shrinkResources true // requires minifyEnabled to set `true`
+            minifyEnabled true
+            // if this option is true, the Android plugin uses ProGuard, otherwise R8 will be used, otherwise ProGuard
+            useProguard true
+            debuggable true
+            jniDebuggable false
+            renderscriptDebuggable false
+            zipAlignEnabled true
+            proguardFiles 'proguard-rules.pro'
+            multiDexEnabled false
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs = ['src/main/kotlin']
+        main.assets.srcDirs = ['src/main/assets']
+
+        test.java.srcDirs = ['src/test/kotlin']
+        test.res.srcDirs = ['src/test/res']
+
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+        androidTest.res.srcDirs = ['src/androidTest/res']
+    }
+
+    packagingOptions {
+        pickFirst("META-INF/atomicfu.kotlin_module")
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+
+    // kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutines"
+
+    // room
+    implementation "androidx.room:room-ktx:$version_room"
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

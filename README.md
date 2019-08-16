@@ -1,0 +1,2 @@
+# MickiNet
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/291f2efb978a40a591a2883b1f9d3e0d)](https://app.codacy.com/app/mirjalal/MickiNet?utm_source=github.com&utm_medium=referral&utm_content=mirjalal/MickiNet&utm_campaign=Badge_Grade_Dashboard)

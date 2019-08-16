@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.talmir.mickinet.databinding.ActivityMainBinding
 
+/**
+ * Entry-point activity.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var dataBinding: ActivityMainBinding

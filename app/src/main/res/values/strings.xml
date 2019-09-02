@@ -1,3 +1,232 @@
 <resources>
-    <string name="app_name">MickiNet</string>
+    <string name="app_name" translatable="false">MickiNet</string>
+
+    <string name="discover_peers_button">Discover</string>
+    <string name="disconnect_peer_button">Disconnect</string>
+    <string name="get_file_button">Launch Gallery</string>
+    <string name="empty" translatable="false"> </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="client_text" translatable="false">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
+    <string name="empty_message">No devices found. Try searching again.</string>
+    <string name="wifi_off_warning">Enable Wi-Fi from system settings</string>
+    <string name="label_me">Device information</string>
+    <string name="turn_on_wifi">Turn on Wi-Fi</string>
+    <string name="turn_on_wifi_message">Wi-Fi is turned off. To start discovery enable Wi-Fi.</string>
+    <string name="discovery_started">Discovery started</string>
+    <string name="discovery_cancelled">Discovery cancelled</string>
+    <string name="aborting_connection">Aborting connection…</string>
+    <string name="channel_lost">Channel lost. Trying again.</string>
+    <string name="connection_lost_permanently">Severe! Channel is probably lost permanently. Try disable/re-Enable Wi-Fi.</string>
+    <string name="discovery_error_1">The operation failed due to an internal error.</string>
+    <string name="discovery_error_2">The operation failed because Wi-Fi Direct is unsupported on the device.</string>
+    <string name="discovery_error_3">The device is busy and unable to service the request.</string>
+    <string name="discovery_error_4">An unknown error occurred.</string>
+    <string name="cancel_tip">Press back to cancel</string>
+    <string name="finding_devices">Finding peers…</string>
+
+    <string name="available">Available</string>
+    <string name="invited">Invited</string>
+    <string name="connected">Connected</string>
+    <string name="failed">Failed</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="unknown">Unknown</string>
+
+    <string name="connect">Connect</string>
+    <string name="connect_to_device">Connect to device?</string>
+    <string name="cancel">Cancel</string>
+    <string name="label_peers">Nearby devices</string>
+    <string name="my_machine" translatable="false">my_machine</string>
+    <string name="name"><b>Name:</b>\u00A0</string>
+    <string name="status">Status:\u00A0</string>
+    <string name="mac_address">MAC Address:\u00A0</string>
+    <string name="is_group_owner">Is group owner?\u00A0</string>
+    <string name="file_received">File received</string>
+    <string name="open_file">Open</string>
+    <string name="file_send">File is on the way</string>
+    <string name="sending_file">Sending the file</string>
+    <string name="sending">Sending…</string>
+    <string name="file_sent">File sent</string>
+    <string name="successful">Successful</string>
+    <string name="click_to_open">Click to open the file</string>
+    <string name="receiving_file">Receiving the file</string>
+    <string name="file_receive">File receive</string>
+    <string name="file_receive_fail">An error occurred. File receive failed.</string>
+    <string name="file_is_not_received">File is not received</string>
+    <string name="file_sent_fail">An error occurred. File send failed.</string>
+    <string name="file_is_not_sent">File is not sent</string>
+    <string name="search_hint">Search for an application</string>
+    <string name="pick_an_app">Select an application</string>
+    <string name="pick_a_file">Pick a file</string>
+    <string name="photo_camera">Take a photo</string>
+    <string name="pick_apk">Choose an app</string>
+    <string name="video_camera">Take a video</string>
+    <string name="clear_history">Clear search history</string>
+    <string name="save">Save</string>
+    <string name="ok" translatable="false">OK</string>
+
+    <string name="settings">Settings</string>
+    <string name="pref_header_general">General</string>
+    <string-array name="multi_select_list_preference_default_value"/>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_header_advanced">Advanced</string>
+    <string name="pref_title_use_default_notifications">Use custom notifications</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_title_light">Light</string>
+
+    <string name="none">None</string>
+    <string name="app_default">App default</string>
+    <string name="white">White</string>
+    <string name="red">Red</string>
+    <string name="yellow">Yellow</string>
+    <string name="green">Green</string>
+    <string name="cyan">Cyan</string>
+    <string name="blue">Blue</string>
+    <string name="purple">Purple</string>
+    <string-array name="pref_light_titles">
+        <item>@string/none</item>
+        <item>@string/app_default</item>
+        <item>@string/white</item>
+        <item>@string/red</item>
+        <item>@string/yellow</item>
+        <item>@string/green</item>
+        <item>@string/cyan</item>
+        <item>@string/blue</item>
+        <item>@string/purple</item>
+    </string-array>
+
+    <string name="_000000" translatable="false">000000</string>
+    <string name="_00DAD6" translatable="false">00DAD6</string>
+    <string name="_FFFFFF" translatable="false">FFFFFF</string>
+    <string name="_FF0000" translatable="false">FF0000</string>
+    <string name="_FFFF00" translatable="false">FFFF00</string>
+    <string name="_00FF00" translatable="false">00FF00</string>
+    <string name="_00FFFF" translatable="false">00FFFF</string>
+    <string name="_004E8E" translatable="false">004E8E</string>
+    <string name="_FF00FF" translatable="false">FF00FF</string>
+    <string-array name="pref_light_values">
+        <item>@string/_000000</item>
+        <item>@string/_00DAD6</item>
+        <item>@string/_FFFFFF</item>
+        <item>@string/_FF0000</item>
+        <item>@string/_FFFF00</item>
+        <item>@string/_00FF00</item>
+        <item>@string/_00FFFF</item>
+        <item>@string/_004E8E</item>
+        <item>@string/_FF00FF</item>
+    </string-array>
+    <string name="default_notification_ringtone">MickiNet default</string>
+    <string name="cyan_color" translatable="false">00DAD6</string>
+
+    <string name="settings_notification_light_summary">Choose a color to blink the notification light when a new file is received.</string>
+    <string name="settings_notification_ringtone_summary">Select a ringtone for incoming files.</string>
+    <string name="settings_notification_vibrate_summary">Vibrate device when an incoming file arrives.</string>
+
+    <string name="incoming_notifications">File send notifications</string>
+    <string name="outgoing_notifications">File receive notifications</string>
+    <string name="app_icon" translatable="false">app_icon</string>
+    <string name="image_of_fast_scroller" translatable="false">image_of_fast_scroller</string>
+
+    <string name="help">Help</string>
+    <string name="conn_conf">Connection configuration</string>
+    <string name="wps_modes">WPS mode</string>
+    <string name="pbc" translatable="false">PBC</string>
+    <string name="pbc_help" translatable="false">Push button configuration</string>
+    <string name="display" translatable="false">Display</string>
+    <string name="display_help" translatable="false">Display pin method configuration - pin is generated and displayed on device</string>
+    <string name="keypad" translatable="false">Keypad</string>
+    <string name="keypad_help" translatable="false">Keypad pin method configuration - pin is entered on device</string>
+    <string name="label" translatable="false">Label</string>
+    <string name="label_help" translatable="false">Label pin method configuration - pin is labelled on device</string>
+    <string-array name="pref_wps_setup_type_titles">
+        <item>@string/pbc</item>
+        <item>@string/display</item>
+        <item>@string/keypad</item>
+        <item>@string/label</item>
+    </string-array>
+
+    <string name="_0" translatable="false">0x00000000</string>
+    <string name="_1" translatable="false">0x00000001</string>
+    <string name="_2" translatable="false">0x00000002</string>
+    <string name="_3" translatable="false">0x00000003</string>
+    <string-array name="pref_wps_setup_values">
+        <item>@string/_0</item>
+        <item>@string/_1</item>
+        <item>@string/_2</item>
+        <item>@string/_3</item>
+    </string-array>
+
+    <string name="basic_conf">Basic configurations</string>
+
+    <string name="warning">Warning!</string>
+    <string name="advanced_conf_warning_msg">These configurations are for advanced users. If you don\'t know what are you doing, please </string>
+    <string name="what_is_wps">WPS modes</string>
+    <string name="define_wps_modes" translatable="false"><b>PBC</b> - Push-button configuration.\n\n<b>Display</b> - Display pin method configuration - pin is generated and displayed on device.\n\n<b>Keypad</b> - Keypad pin method configuration - pin is entered on device.\n\n<b>Label</b> - Label pin method configuration - pin is labelled on device.\n\nFor more information read <a href="http://www.wi-fi.org/knowledge-center/faq/how-does-wi-fi-protected-setup-work">official documentation</a> or <a href="https://en.wikipedia.org/wiki/Wi-Fi_Protected_Setup">wiki</a>.</string>
+    <string name="auto_open_file">Open file when received</string>
+    <string name="auto_open_summary">Check this setting to automatically open the received file.</string>
+    <string name="send_crash_reports">Send crash reports</string>
+    <string name="crash_report_summary">Turn on this setting to send crash reports. Enabling this option help us to get error messages when something went wrong in application. We don\'t collect any private information.</string>
+    <string name="advanced_conf">Advanced configurations</string>
+    <string name="show_adv_confs">Enable advanced settings</string>
+    <string name="advanced_confs_summary">These settings are recommended only for advanced users.</string>
+    <string name="choose_wps_mode">Choose WPS mode.</string>
+    <string name="pref_header_help">Help</string>
+    <string name="pref_header_statistics">File statistics</string>
+    <string name="describe_problem">Please describe your problem in a detail</string>
+    <string name="contact_us_summary">Questions? Need help? Find a bug?</string>
+    <string name="contact_us">Contact us</string>
+    <string name="app_info">App info</string>
+    <string name="terms_and_privacy">Terms and Privacy Policy</string>
+    <string name="send">Send</string>
+    <string name="include_logs">Include logs</string>
+    <string name="auto_turn_on_wifi">Turn on Wi-Fi when app starts</string>
+    <string name="auto_turn_on_wifi_summary">Automatically turns on Wi-Fi when app started.</string>
+    <string name="tab_text_1">Sent</string>
+    <string name="tab_text_2">Received</string>
+    <string name="action_reset_statistics">Reset statistics</string>
+    <string name="no_data_available">No data available.</string>
+    <string name="enter_new_device_name">Enter new device name</string>
+    <string name="change">Change</string>
+    <string name="pick_media">Pick a media file</string>
+    <string name="change_device_name">Change device name</string>
+    <string name="file_not_exists">File not exists!</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="reset_all_stats">This will reset all statistics.</string>
+    <string name="reset">reset</string>
+    <string name="done">Done!</string>
+    <string name="file_types">File types</string>
+    <string name="photos">Photos</string>
+    <string name="videos">Videos</string>
+    <string name="media">Media</string>
+    <string name="apks">APKs</string>
+    <string name="others">Others</string>
+    <string name="no_email_client">There are no email clients installed.</string>
+    <string name="send_mail">Send email</string>
+    <string name="slide1_title">Share your files with us</string>
+    <string name="slide1_description">Would you try?</string>
+    <string name="slide1_snack_message">We provide a solution to make you love MickiNet</string>
+    <string name="slide1_button_text">Share with love</string>
+    <string name="slide2_title">Want more?</string>
+    <string name="slide2_description">Go on</string>
+    <string name="slide3_title">Let us access device storage</string>
+    <string name="slide3_description">we need it</string>
+    <string name="slide4_title">Do you take tons of selfies?</string>
+    <string name="slide4_description">oops, forgotten permission</string>
+    <string name="slide5_title">That\'s it</string>
+    <string name="slide5_description">Would you join us?</string>
+    <string name="sorry_for_conection">Sorry! You\'ll be able to send files after a successful connection.</string>
+    <string name="enter_dev_name_error">Enter a character at least</string>
+    <string name="dev_name_changed">Device name changed!</string>
+    <string name="dev_name_not_changed">Device name not changed!</string>
+    <string name="valid_dev_name_error">Enter valid device name.</string>
+    <string name="operation_succeeded">Operation status: Succeeded</string>
+    <string name="operation_failed">Operation status: Failed</string>
+    <string name="open_source_licenses">Open source licenses</string>
+    <string name="got_it" translatable="false">Got it</string>
+    <string name="showcase1_content" translatable="false">This card has some information about your device. Try to click on it!</string>
+    <string name="okay_got_it" translatable="false">Okay, I got it</string>
+    <string name="showcase2_content" translatable="false">To start search for nearby devices just click on it.</string>
+    <string name="enter_process_name">Enter a name</string>
 </resources>

@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">MickiNet</string>
 
+    <!-- device information strings -->
+    <string name="device_info">Device information</string>
+    <string name="device_name"><b>Name:</b> %sgdfgfdggf</string>
+    <string name="device_status"><b>Status:</b> %s</string>
+    <string name="device_mac_address"><b>MAC Address:</b> %s</string>
+
     <string name="discover_peers_button">Discover</string>
     <string name="disconnect_peer_button">Disconnect</string>
     <string name="get_file_button">Launch Gallery</string>
@@ -10,7 +16,6 @@
     <string name="client_text" translatable="false">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
     <string name="empty_message">No devices found. Try searching again.</string>
     <string name="wifi_off_warning">Enable Wi-Fi from system settings</string>
-    <string name="label_me">Device information</string>
     <string name="turn_on_wifi">Turn on Wi-Fi</string>
     <string name="turn_on_wifi_message">Wi-Fi is turned off. To start discovery enable Wi-Fi.</string>
     <string name="discovery_started">Discovery started</string>
@@ -37,9 +42,7 @@
     <string name="cancel">Cancel</string>
     <string name="label_peers">Nearby devices</string>
     <string name="my_machine" translatable="false">my_machine</string>
-    <string name="name"><b>Name:</b>\u00A0</string>
-    <string name="status">Status:\u00A0</string>
-    <string name="mac_address">MAC Address:\u00A0</string>
+
     <string name="is_group_owner">Is group owner?\u00A0</string>
     <string name="file_received">File received</string>
     <string name="open_file">Open</string>

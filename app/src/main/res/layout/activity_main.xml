@@ -8,14 +8,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/startGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/sixteen_dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/endGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/sixteen_dp" />
+
         <fragment
             android:id="@+id/fragment_device_detail"
             class="com.talmir.mickinet.fragments.DeviceDetailFragment"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/startGrid"
+            app:layout_constraintEnd_toEndOf="@id/endGrid"
             tools:layout="@layout/device_details"/>
 
 <!--        <fragment-->

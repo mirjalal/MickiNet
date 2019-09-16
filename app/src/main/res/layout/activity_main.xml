@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".screens.main.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,6 +16,13 @@
             app:layout_constraintGuide_begin="@dimen/sixteen_dp" />
 
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/sixteen_dp" />
+
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/endGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,20 +31,25 @@
 
         <fragment
             android:id="@+id/fragment_device_detail"
-            class="com.talmir.mickinet.fragments.DeviceDetailFragment"
-            android:layout_width="0dp"
+            class="com.talmir.mickinet.screens.main.fragments.DeviceDetailFragment"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="@id/startGrid"
+            app:layout_constraintTop_toTopOf="@id/topGrid"
             app:layout_constraintEnd_toEndOf="@id/endGrid"
-            tools:layout="@layout/device_details"/>
+            tools:layout="@layout/fragment_device_details" />
 
-<!--        <fragment-->
-<!--            android:id="@+id/fragment_devices_list"-->
-<!--            class="com.talmir.mickinet.fragments.DeviceListFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            tools:layout="@layout/row_devices" />-->
+        <fragment
+            android:id="@+id/fragment_devices_list"
+            class="com.talmir.mickinet.screens.main.fragments.DevicesListFragment"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="@dimen/zero_dp"
+            android:layout_marginTop="@dimen/eight_dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/endGrid"
+            app:layout_constraintStart_toStartOf="@id/startGrid"
+            app:layout_constraintTop_toBottomOf="@id/fragment_device_detail"
+            tools:layout="@layout/fragment_devices_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

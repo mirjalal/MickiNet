@@ -3,9 +3,23 @@
 
     <!-- device information strings -->
     <string name="device_info">Device information</string>
-    <string name="device_name"><b>Name:</b> %sgdfgfdggf</string>
-    <string name="device_status"><b>Status:</b> %s</string>
-    <string name="device_mac_address"><b>MAC Address:</b> %s</string>
+    <string name="device_name"><![CDATA[<b>Name:</b>]]> %1$s</string>
+    <string name="device_status"><![CDATA[<b>Status:</b>]]> %1$s</string>
+    <string name="device_mac_address"><![CDATA[<b>MAC Address:</b>]]> %1$s</string>
+
+    <string name="change_device_name">Change device name</string>
+    <string name="enter_new_device_name">Enter new device name</string>
+    <string name="confirm_device_name_change">Confirm</string>
+
+    <string name="provide_device_name_error">Enter a character at least</string>
+    <string name="device_name_change_successful">Device name changed</string>
+    <string name="device_name_change_unsuccessful">Unable to change device name</string>
+
+    <!-- devices list strings -->
+    <string name="nearby_devices">Nearby devices</string>
+    <string name="discovering_nearby_devices">Please wait. Looking for other devices…</string>
+    <string name="no_device_found">No devices found. Try searching again.</string>
+
 
     <string name="discover_peers_button">Discover</string>
     <string name="disconnect_peer_button">Disconnect</string>
@@ -14,7 +28,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="client_text" translatable="false">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
-    <string name="empty_message">No devices found. Try searching again.</string>
     <string name="wifi_off_warning">Enable Wi-Fi from system settings</string>
     <string name="turn_on_wifi">Turn on Wi-Fi</string>
     <string name="turn_on_wifi_message">Wi-Fi is turned off. To start discovery enable Wi-Fi.</string>
@@ -40,7 +53,6 @@
     <string name="connect">Connect</string>
     <string name="connect_to_device">Connect to device?</string>
     <string name="cancel">Cancel</string>
-    <string name="label_peers">Nearby devices</string>
     <string name="my_machine" translatable="false">my_machine</string>
 
     <string name="is_group_owner">Is group owner?\u00A0</string>
@@ -190,10 +202,7 @@
     <string name="tab_text_2">Received</string>
     <string name="action_reset_statistics">Reset statistics</string>
     <string name="no_data_available">No data available.</string>
-    <string name="enter_new_device_name">Enter new device name</string>
-    <string name="change">Change</string>
-    <string name="pick_media">Pick a media file</string>
-    <string name="change_device_name">Change device name</string>
+
     <string name="file_not_exists">File not exists!</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="reset_all_stats">This will reset all statistics.</string>
@@ -220,10 +229,7 @@
     <string name="slide5_title">That\'s it</string>
     <string name="slide5_description">Would you join us?</string>
     <string name="sorry_for_conection">Sorry! You\'ll be able to send files after a successful connection.</string>
-    <string name="enter_dev_name_error">Enter a character at least</string>
-    <string name="dev_name_changed">Device name changed!</string>
-    <string name="dev_name_not_changed">Device name not changed!</string>
-    <string name="valid_dev_name_error">Enter valid device name.</string>
+
     <string name="operation_succeeded">Operation status: Succeeded</string>
     <string name="operation_failed">Operation status: Failed</string>
     <string name="open_source_licenses">Open source licenses</string>

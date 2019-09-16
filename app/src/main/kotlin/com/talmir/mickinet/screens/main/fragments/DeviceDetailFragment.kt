@@ -16,9 +16,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.talmir.mickinet.R
 import com.talmir.mickinet.databinding.DeviceNameChangeLayoutBinding
 import com.talmir.mickinet.databinding.FragmentDeviceDetailsBinding
-import com.talmir.mickinet.helpers.DeviceNameChanger
+import com.talmir.mickinet.helpers.DeviceNameChangerUtil
 import com.talmir.mickinet.helpers.Repository
 
+/**
+ * A [Fragment] subclass to show user's device information in main page.
+ */
 class DeviceDetailFragment : Fragment() {
 
     private lateinit var fragmentActivity: FragmentActivity
@@ -33,17 +36,17 @@ class DeviceDetailFragment : Fragment() {
         binding = FragmentDeviceDetailsBinding.inflate(inflater, container, false)
 
         /**
-         * We register our [wifiDirectBroadcastReceiver] in [onResume] method.
-         * this means, can get device information JUST AFTER [onResume] function
-         * fired. Due to we defined some properties in our layout file, we should
-         * set their values initially. Lines below we set initial values of
-         * those properties. Otherwise, we will get [NullPointerException].
+         * Lines below we set initial values of some properties.
+         * Otherwise, we will get [NullPointerException]. We'll
+         * get device's real information just after observer gets
+         * the data.
          */
         binding.deviceName = "---"
         binding.deviceStatus = "---"
         binding.deviceMacAddress = "---"
         binding.deviceInfoHolder.setOnClickListener { showDeviceNameChangeDialog() }
 
+        // subscribe to deviceInfo changes to get device information
         Repository.instance().deviceInfo().observe(fragmentActivity, Observer {
             it.run {
                 binding.deviceName = name
@@ -60,7 +63,9 @@ class DeviceDetailFragment : Fragment() {
         val alert: AlertDialog = AlertDialog.Builder(fragmentActivity).create()
 
         deviceNameChangeViewBinding.newDeviceName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // nothing special to do
+            }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().isEmpty()) {
@@ -72,15 +77,17 @@ class DeviceDetailFragment : Fragment() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                // nothing special to do
+            }
         })
 
         alert.setTitle(R.string.change_device_name)
         alert.setView(deviceNameChangeViewBinding.root)
         alert.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.confirm_device_name_change)) { _: DialogInterface?, _: Int ->
             alert.dismiss()
-            /** check fif device name changed successfully */
-            if (DeviceNameChanger.changeDeviceName(fragmentActivity, deviceNameChangeViewBinding.newDeviceName.text.toString()))
+            /** check if device name changed successfully */
+            if (DeviceNameChangerUtil.changeDeviceName(fragmentActivity, deviceNameChangeViewBinding.newDeviceName.text.toString()))
                 Snackbar.make(binding.root, R.string.device_name_change_successful, Snackbar.LENGTH_LONG).show()
             else
                 Snackbar.make(binding.root, R.string.device_name_change_unsuccessful, Snackbar.LENGTH_LONG).show()

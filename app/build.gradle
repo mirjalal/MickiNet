@@ -31,18 +31,15 @@ android {
     buildTypes {
         debug {
             debuggable true
-            useProguard false
             jniDebuggable true
             renderscriptDebuggable true
             minifyEnabled false
             zipAlignEnabled false
-            multiDexEnabled true // optional: enable in debug mode
+            //multiDexEnabled true // optional: enable in debug mode
         }
         release {
-            shrinkResources true // requires minifyEnabled to set `true`
+            shrinkResources true
             minifyEnabled true
-            // if this option is true, the Android plugin uses ProGuard, otherwise R8 will be used, otherwise ProGuard
-            useProguard true
             debuggable true
             jniDebuggable false
             renderscriptDebuggable false

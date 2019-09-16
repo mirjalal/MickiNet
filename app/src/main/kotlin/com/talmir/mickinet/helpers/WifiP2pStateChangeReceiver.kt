@@ -11,6 +11,10 @@ import androidx.lifecycle.MutableLiveData
 import com.talmir.mickinet.R
 import com.talmir.mickinet.models.DeviceDetails
 
+/**
+ * A class which handles Wifi P2P status changes and delivers to MainActivity
+ * on demand by deriving from [BroadcastReceiver].
+ */
 class WifiP2pStateChangeReceiver(manager: WifiP2pManager, channel: Channel) : BroadcastReceiver() {
 
     private val _isWifiP2pEnabled = MutableLiveData<Boolean>()

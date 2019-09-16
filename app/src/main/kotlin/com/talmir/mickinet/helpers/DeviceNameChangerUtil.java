@@ -22,7 +22,7 @@ import static android.os.Looper.getMainLooper;
  * @author mirjalal
  * @since Jul 30, 2018
  */
-public final class DeviceNameChanger {
+public final class DeviceNameChangerUtil {
     /**
      * Changes device name using Java Reflection API explicitly.
      * Because of, Android have not gave any option to achieve
@@ -57,10 +57,14 @@ public final class DeviceNameChanger {
             argList[1] = newName;
             argList[2] = new WifiP2pManager.ActionListener() {
                 @Override
-                public void onSuccess() { }
+                public void onSuccess() {
+                    // nothing to do here
+                }
 
                 @Override
-                public void onFailure(int reason) { }
+                public void onFailure(int reason) {
+                    // nothing to do in this method
+                }
             };
             setDeviceName.invoke(mManager[0], argList);
             return true;

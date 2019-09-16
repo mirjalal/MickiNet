@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.talmir.mickinet.databinding.DevicesListItemBinding
 import com.talmir.mickinet.models.DeviceDetails
 
-class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHolder>(
-    DeviceDetailsDiffItemCallback) {
+/**
+ * A adapter class that holds items for [RecyclerView].
+ */
+class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHolder>(DeviceDetailsDiffItemCallback) {
     /**
      * Called when recycler view request for the `layout` to show.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder.from(parent)
 
     /**
      * Called just after the [onCreateViewHolder] invocation to bind
@@ -27,20 +30,27 @@ class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHol
      */
     class ViewHolder private constructor(private val binding: DevicesListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DeviceDetails) {
+        /**
+         * Binds [deviceItemDetails] object to layout file properties
+         */
+        fun bind(deviceItemDetails: DeviceDetails) {
             // sets the properties in the binding class
-            binding.nearbyDeviceName = item.name
-            binding.nearbyDeviceMAC = item.macAddress
+            binding.nearbyDeviceName = deviceItemDetails.name
+            binding.nearbyDeviceMAC = deviceItemDetails.macAddress
 
             /**
              * causes the properties updates to execute immediately.
              * since I'm calling [bind] from [onBindViewHolder] having the bindings execute immediately.
-             * as a practice can prevent the recycler view from having to perform extra calculations when it figures out how to display the list
+             * as a practice can prevent the recycler view from having to perform extra calculations
+             * when it figures out how to display the list.
              */
             binding.executePendingBindings()
         }
 
         companion object {
+            /**
+             * Inflate required layout file and pass it to [ViewHolder] as view.
+             */
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = DevicesListItemBinding.inflate(layoutInflater, parent, false)
@@ -53,7 +63,7 @@ class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHol
     /**
      * Callback to calculate differences between two non-null items in a list.
      *
-     * Used by ListAdapter to calculate the minimum number of changes between
+     * Used by [ListAdapter] to calculate the minimum number of changes between
      * and old list and a new list that's been passed to [submitList].
      */
     companion object DeviceDetailsDiffItemCallback : DiffUtil.ItemCallback<DeviceDetails>() {

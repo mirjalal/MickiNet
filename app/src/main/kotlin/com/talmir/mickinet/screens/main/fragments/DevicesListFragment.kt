@@ -10,7 +10,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.talmir.mickinet.databinding.FragmentDevicesListBinding
+import com.talmir.mickinet.helpers.NearbyDeviceDiscoveryState
 
+/**
+ * A [Fragment] subclass to discover, show and connect
+ * via WiFi Direct channel to nearby devices.
+ *
+ * In this class we will listen to Wifi Direct changes
+ * on system level. To do this I implemented the
+ * [WifiP2pManager.PeerListListener] interface here.
+ * For more information please look at UML diagram.
+ */
 class DevicesListFragment : Fragment(), WifiP2pManager.PeerListListener {
     private lateinit var fragmentActivity: FragmentActivity
     private lateinit var binding: FragmentDevicesListBinding
@@ -23,7 +33,7 @@ class DevicesListFragment : Fragment(), WifiP2pManager.PeerListListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDevicesListBinding.inflate(inflater, container, false)
 
-        binding.nearbyDeviceDiscoverStatus = STOPPED
+        binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.STOPPED
 
 //        val manager = fragmentActivity.getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager
 //        val channel = manager.initialize(fragmentActivity, fragmentActivity.mainLooper, null)
@@ -52,11 +62,5 @@ class DevicesListFragment : Fragment(), WifiP2pManager.PeerListListener {
 //        if (peers != null) {
 //
 //        }
-    }
-
-    companion object NearbyDeviceDiscoveryState {
-        const val STARTED = 0
-        const val STOPPED = 1
-        const val NO_NEARBY_DEVICE = 2
     }
 }

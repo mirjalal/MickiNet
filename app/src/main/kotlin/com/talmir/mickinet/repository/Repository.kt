@@ -1,5 +1,6 @@
-package com.talmir.mickinet.helpers
+package com.talmir.mickinet.repository
 
+import android.net.wifi.p2p.WifiP2pDevice
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.talmir.mickinet.models.DeviceDetails
@@ -24,17 +25,14 @@ class Repository private constructor() {
         fun instance() = repositoryInstance
     }
 
-    // BEGIN: WiFi-Direct status related stuff
-    private val mIsWifiP2pEnabled = MediatorLiveData<Boolean>()
 
-    /**
-     * Returns immutable variant of [mIsWifiP2pEnabled].
-     */
-    fun isWifiP2pEnabled(): LiveData<Boolean> = mIsWifiP2pEnabled
+    //region WiFi Direct status related stuff
+    private val mIsWifiP2pEnabled = MediatorLiveData<Boolean>()
+    val isWifiP2pEnabled: LiveData<Boolean> = mIsWifiP2pEnabled
 
     /**
      * Register a [LiveData] object to be observed.
-     * 
+     *
      * @param source a [LiveData] object to register
      */
     fun addWifiP2pEnableSource(source: LiveData<Boolean>) =
@@ -49,16 +47,12 @@ class Repository private constructor() {
      */
     fun removeWifiP2pEnableSource(source: LiveData<Boolean>) =
         mIsWifiP2pEnabled.removeSource(source)
-    // END: WiFi-Direct status related stuff
+    //endregion WiFi Direct status related stuff
 
 
-    // BEGIN: device connection info related stuff
+    //region Device connection info related stuff
     private val mIsConnected = MediatorLiveData<Boolean>()
-
-    /**
-     * Returns immutable variant of [mIsConnected].
-     */
-    fun isConnected(): LiveData<Boolean> = mIsConnected
+    val isConnected: LiveData<Boolean> = mIsConnected
 
     /**
      * Register a [LiveData] object to be observed.
@@ -77,16 +71,12 @@ class Repository private constructor() {
      */
     fun removeConnectionSource(source: LiveData<Boolean>) =
         mIsConnected.removeSource(source)
-    // END: device connection info related stuff
+    //endregion Device connection info related stuff
 
 
-    // BEGIN: device info related stuff
+    //region Device info related stuff
     private val mDeviceInfo = MediatorLiveData<DeviceDetails>()
-
-    /**
-     * Returns immutable variant of [mDeviceInfo].
-     */
-    fun deviceInfo(): LiveData<DeviceDetails> = mDeviceInfo
+    val deviceInfo: LiveData<DeviceDetails> = mDeviceInfo
 
     /**
      * Register a [LiveData] object to be observed.
@@ -105,5 +95,29 @@ class Repository private constructor() {
      */
     fun removeDeviceInfoSource(source: LiveData<DeviceDetails>) =
         mDeviceInfo.removeSource(source)
-    // END: device info related stuff
+    //endregion Device info related stuff
+
+
+    //region Peer list related stuff
+    private val mPeerList = MediatorLiveData<List<WifiP2pDevice>>()
+    val peerList = mPeerList
+
+    /**
+     * Register a [LiveData] object to be observed.
+     *
+     * @param source a [LiveData] object to register
+     */
+    fun addPeerListSource(source: LiveData<Collection<WifiP2pDevice>>) =
+        mPeerList.addSource(source) {
+            mPeerList.value = it.toList()
+        }
+
+    /**
+     * Unregister [source] to prevent its observation.
+     *
+     * @param source a [LiveData] source to unsubscribe
+     */
+    fun removePeerListSource(source: LiveData<Collection<WifiP2pDevice>>) =
+        mPeerList.removeSource(source)
+    //endregion Peer list related stuff
 }

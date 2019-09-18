@@ -6,7 +6,7 @@
 
     <data>
         <variable name="deviceName" type="String" />
-        <variable name="deviceStatus" type="String" />
+        <variable name="deviceStatus" type="Integer" />
         <variable name="deviceMacAddress" type="String" />
     </data>
 
@@ -45,8 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:devicePropType="@{0}"
-                app:deviceProp="@{deviceName}"
+                app:deviceName="@{deviceName}"
                 tools:text="Device name" />
 
             <TextView
@@ -56,8 +55,7 @@
                 android:layout_marginTop="@dimen/four_dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_device_name"
-                app:devicePropType="@{1}"
-                app:deviceProp="@{deviceStatus}"
+                app:deviceStatus="@{deviceStatus}"
                 tools:text="Device status"/>
 
             <TextView
@@ -66,8 +64,7 @@
                 android:layout_marginTop="@dimen/four_dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_device_status"
-                app:devicePropType="@{2}"
-                app:deviceProp="@{deviceMacAddress}"
+                app:deviceMacAddress="@{deviceMacAddress}"
                 tools:text="MAC Address: 45-4A-03-AA-FF-87"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.talmir.mickinet.R
 import com.talmir.mickinet.databinding.ActivityMainBinding
-import com.talmir.mickinet.helpers.Repository
-import com.talmir.mickinet.helpers.WifiP2pStateChangeReceiver
+import com.talmir.mickinet.repository.Repository
+import com.talmir.mickinet.background.WifiP2pStateChangeReceiver
 
 /**
  * Entry-point activity.
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         // Indicates this device's details have changed.
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION)
 
-        wifiDirectBroadcastReceiver = WifiP2pStateChangeReceiver(manager, channel)
+        wifiDirectBroadcastReceiver =
+            WifiP2pStateChangeReceiver(manager, channel)
     }
 
     override fun onStart() {
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         Repository.instance().addWifiP2pEnableSource(wifiDirectBroadcastReceiver.isWifiP2pEnabled)
         Repository.instance().addConnectionSource(wifiDirectBroadcastReceiver.isConnected)
         Repository.instance().addDeviceInfoSource(wifiDirectBroadcastReceiver.deviceInfo)
+        Repository.instance().addPeerListSource(wifiDirectBroadcastReceiver.peerList)
     }
 
     override fun onStop() {
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         Repository.instance().removeWifiP2pEnableSource(wifiDirectBroadcastReceiver.isWifiP2pEnabled)
         Repository.instance().removeConnectionSource(wifiDirectBroadcastReceiver.isConnected)
         Repository.instance().removeDeviceInfoSource(wifiDirectBroadcastReceiver.deviceInfo)
+        Repository.instance().removePeerListSource(wifiDirectBroadcastReceiver.peerList)
         unregisterReceiver(wifiDirectBroadcastReceiver)
     }
 }

@@ -1,5 +1,7 @@
 package com.talmir.mickinet.screens.main.fragments
 
+import android.content.Context
+import android.net.wifi.p2p.WifiP2pDevice
 import android.view.View
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
@@ -8,26 +10,48 @@ import androidx.databinding.BindingAdapter
 import com.talmir.mickinet.R
 import com.talmir.mickinet.helpers.NearbyDeviceDiscoveryState
 
-/**
- * Appends [what] to string resource and sets them
- * proper [TextView].
- *
- * @param which determines which string resource should
- *              be formatted
- * @param what  what should be append to pre-defined
- *              string resource
- */
-@BindingAdapter(value = ["devicePropType", "deviceProp"])
-fun TextView.bindDeviceProp(which: Int, what: String) {
-    // get string resource by which
-    val boldText = when (which) {
-        0 -> context.getString(R.string.device_name)
-        1 -> context.getString(R.string.device_status)
-        else -> context.getString(R.string.device_mac_address)
+private fun Int.getDeviceStatus(context: Context) =
+    when (this) {
+        WifiP2pDevice.AVAILABLE -> context.getString(R.string.available)
+        WifiP2pDevice.INVITED -> context.getString(R.string.invited)
+        WifiP2pDevice.CONNECTED -> context.getString(R.string.connected)
+        WifiP2pDevice.FAILED -> context.getString(R.string.failed)
+        WifiP2pDevice.UNAVAILABLE -> context.getString(R.string.unavailable)
+        else -> context.getString(R.string.unknown)
     }
 
-    // format string resource
-    text = HtmlCompat.fromHtml(boldText.format(what), HtmlCompat.FROM_HTML_MODE_LEGACY)
+/**
+ * Binds [name] to device name field in view.
+ */
+@BindingAdapter("deviceName")
+fun TextView.bindDeviceName(name: String) {
+    text = HtmlCompat.fromHtml(
+        context.getString(R.string.device_name).format(name),
+        HtmlCompat.FROM_HTML_MODE_LEGACY
+    )
+}
+
+/**
+ * Binds [status] to device status field in view.
+ */
+@BindingAdapter("deviceStatus")
+fun TextView.bindDeviceStatus(status: Int) {
+    text = HtmlCompat.fromHtml(
+        context.getString(R.string.device_status).format(
+            status.getDeviceStatus(context)
+        ), HtmlCompat.FROM_HTML_MODE_LEGACY
+    )
+}
+
+/**
+ * Binds [macAddress] to device mac address field in view.
+ */
+@BindingAdapter("deviceMacAddress")
+fun TextView.bindDeviceMacAddress(macAddress: String) {
+    text = HtmlCompat.fromHtml(
+        context.getString(R.string.device_mac_address).format(macAddress),
+        HtmlCompat.FROM_HTML_MODE_LEGACY
+    )
 }
 
 /**
@@ -38,7 +62,7 @@ fun TextView.bindDeviceProp(which: Int, what: String) {
 @BindingAdapter("shouldBeVisible")
 fun View.bindVisibility(status: Int) {
     when (status) {
-        NearbyDeviceDiscoveryState.NOTHING_FOUND -> {
+        NearbyDeviceDiscoveryState.NOT_FOUND -> {
             if (this is TextView) {
                 text = context.getString(R.string.no_device_found)
                 visibility = View.VISIBLE
@@ -60,6 +84,10 @@ fun View.bindVisibility(status: Int) {
             }
             if (this is ContentLoadingProgressBar)
                 visibility = View.GONE
+        }
+
+        NearbyDeviceDiscoveryState.DISCOVERED -> {
+            visibility = View.GONE
         }
     }
 }

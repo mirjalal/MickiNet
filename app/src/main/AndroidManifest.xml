@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,AllowBackup">
         <receiver
-            android:name=".helpers.WifiP2pStateChangeReceiver"
+            android:name=".background.WifiP2pStateChangeReceiver"
             android:enabled="true"
             android:exported="false" />
 

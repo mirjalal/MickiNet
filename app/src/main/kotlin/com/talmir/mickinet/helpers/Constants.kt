@@ -4,10 +4,11 @@ package com.talmir.mickinet.helpers
  * Following constants describes nearby devices search statuses.
  *
  * They have following meanings:
- * [STARTED] - discovery started
- * [STOPPED] - discovery stopped due to any reason
- *             (devices found, user stopped, system error occurred etc.)
- * [NOTHING_FOUND] - no any device found
+ * [STARTED]    - discovery started
+ * [STOPPED]    - discovery stopped due to any reason
+ *                (devices found, user stopped, system error occurred etc.)
+ * [NOT_FOUND]  - no any device found
+ * [DISCOVERED] - nearby devices discovered
  *
  * Because of memory problems, we should escape from using Enums in Android.
  * Thus, I created those integer constants to use.
@@ -16,5 +17,6 @@ package com.talmir.mickinet.helpers
 object NearbyDeviceDiscoveryState {
     const val STARTED = 0
     const val STOPPED = 1
-    const val NOTHING_FOUND = 2
+    const val NOT_FOUND = 2
+    const val DISCOVERED = 3
 }

@@ -8,4 +8,4 @@ package com.talmir.mickinet.models
  * @param status     device availability indicator
  * @param macAddress the MAC address of a device
  */
-data class DeviceDetails(val name: String, val status: String, val macAddress: String)
+data class DeviceDetails(val name: String, val status: Int, val macAddress: String)

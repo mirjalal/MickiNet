@@ -17,7 +17,7 @@ import com.talmir.mickinet.R
 import com.talmir.mickinet.databinding.DeviceNameChangeLayoutBinding
 import com.talmir.mickinet.databinding.FragmentDeviceDetailsBinding
 import com.talmir.mickinet.helpers.DeviceNameChangerUtil
-import com.talmir.mickinet.helpers.Repository
+import com.talmir.mickinet.repository.Repository
 
 /**
  * A [Fragment] subclass to show user's device information in main page.
@@ -42,12 +42,12 @@ class DeviceDetailFragment : Fragment() {
          * the data.
          */
         binding.deviceName = "---"
-        binding.deviceStatus = "---"
+        binding.deviceStatus = -1
         binding.deviceMacAddress = "---"
         binding.deviceInfoHolder.setOnClickListener { showDeviceNameChangeDialog() }
 
         // subscribe to deviceInfo changes to get device information
-        Repository.instance().deviceInfo().observe(fragmentActivity, Observer {
+        Repository.instance().deviceInfo.observe(fragmentActivity, Observer {
             it.run {
                 binding.deviceName = name
                 binding.deviceStatus = status

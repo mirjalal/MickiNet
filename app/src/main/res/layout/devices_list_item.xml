@@ -7,12 +7,14 @@
     <data>
         <variable name="nearbyDeviceName" type="String" />
         <variable name="nearbyDeviceMAC" type="String" />
+        <variable name="nearbyDeviceItemClickListener" type="com.talmir.mickinet.screens.main.fragments.NearbyDevicesListItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/sixteen_dp">
+        android:padding="@dimen/sixteen_dp"
+        android:onClick="@{nearbyDeviceItemClickListener.onClick(nearbyDeviceMAC)}">
 
         <ImageView
             android:id="@+id/devices_list_item_image"

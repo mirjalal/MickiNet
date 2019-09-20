@@ -11,7 +11,8 @@ import com.talmir.mickinet.models.DeviceDetails
 /**
  * A adapter class that holds items for [RecyclerView].
  */
-class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHolder>(DeviceDetailsDiffItemCallback) {
+class DevicesListAdapter(private val clickListener: NearbyDevicesListItemClickListener? = null) :
+    ListAdapter<DeviceDetails, DevicesListAdapter.ViewHolder>(DeviceDetailsDiffItemCallback) {
     /**
      * Called when recycler view request for the `layout` to show.
      */
@@ -23,7 +24,7 @@ class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHol
      * the data to pre-initialized view.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
 
     /**
      * A standard view holder class to hold the views ~_~
@@ -33,10 +34,11 @@ class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHol
         /**
          * Binds [deviceItemDetails] object to layout file properties
          */
-        fun bind(deviceItemDetails: DeviceDetails) {
+        fun bind(deviceItemDetails: DeviceDetails, clickListener: NearbyDevicesListItemClickListener?) {
             // sets the properties in the binding class
             binding.nearbyDeviceName = deviceItemDetails.name
             binding.nearbyDeviceMAC = deviceItemDetails.macAddress
+            binding.nearbyDeviceItemClickListener = clickListener
 
             /**
              * causes the properties updates to execute immediately.
@@ -75,4 +77,14 @@ class DevicesListAdapter : ListAdapter<DeviceDetails, DevicesListAdapter.ViewHol
         override fun areContentsTheSame(oldItem: DeviceDetails, newItem: DeviceDetails) =
             oldItem.macAddress == newItem.macAddress
     }
+}
+
+/**
+ * A click listener class to handle recycler view item click.
+ */
+class NearbyDevicesListItemClickListener(val clickListener: (macAddress: String) -> Unit) {
+    /**
+     * A function that will be fired on recycler view each item's click.
+     */
+    fun onClick(macAddress: String) = clickListener(macAddress)
 }

@@ -8,7 +8,8 @@ import com.talmir.mickinet.models.DeviceDetails
 /**
  * Our Single source of truth (SSoT) class.
  *
- * Flow of data that comes from [WifiP2pStateChangeReceiver]
+ * Flow of data that comes from
+ * [com.talmir.mickinet.background.WifiP2pStateChangeReceiver]
  * to view through SSoT class (in this case [Repository] class).
  */
 class Repository private constructor() {
@@ -27,7 +28,9 @@ class Repository private constructor() {
 
 
     //region WiFi Direct status related stuff
-    private val mIsWifiP2pEnabled = MediatorLiveData<Boolean>()
+    private val mIsWifiP2pEnabled: MediatorLiveData<Boolean> by lazy {
+        MediatorLiveData<Boolean>()
+    }
     val isWifiP2pEnabled: LiveData<Boolean> = mIsWifiP2pEnabled
 
     /**
@@ -51,7 +54,9 @@ class Repository private constructor() {
 
 
     //region Device connection info related stuff
-    private val mIsConnected = MediatorLiveData<Boolean>()
+    private val mIsConnected: MediatorLiveData<Boolean> by lazy {
+        MediatorLiveData<Boolean>()
+    }
     val isConnected: LiveData<Boolean> = mIsConnected
 
     /**
@@ -75,7 +80,9 @@ class Repository private constructor() {
 
 
     //region Device info related stuff
-    private val mDeviceInfo = MediatorLiveData<DeviceDetails>()
+    private val mDeviceInfo: MediatorLiveData<DeviceDetails> by lazy {
+        MediatorLiveData<DeviceDetails>()
+    }
     val deviceInfo: LiveData<DeviceDetails> = mDeviceInfo
 
     /**
@@ -99,8 +106,10 @@ class Repository private constructor() {
 
 
     //region Peer list related stuff
-    private val mPeerList = MediatorLiveData<List<WifiP2pDevice>>()
-    val peerList = mPeerList
+    private val mPeerList: MediatorLiveData<List<WifiP2pDevice>> by lazy {
+        MediatorLiveData<List<WifiP2pDevice>>()
+    }
+    val peerList: LiveData<List<WifiP2pDevice>> = mPeerList
 
     /**
      * Register a [LiveData] object to be observed.

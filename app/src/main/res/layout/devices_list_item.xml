@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/sixteen_dp"
-        android:onClick="@{nearbyDeviceItemClickListener.onClick(nearbyDeviceMAC)}">
+        android:onClick="@{() -> nearbyDeviceItemClickListener.onClick(nearbyDeviceMAC)}"
+        android:foreground="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/devices_list_item_image"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView

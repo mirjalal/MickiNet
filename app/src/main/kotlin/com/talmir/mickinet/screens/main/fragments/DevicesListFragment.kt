@@ -1,6 +1,8 @@
 package com.talmir.mickinet.screens.main.fragments
 
 import android.content.Context
+import android.net.wifi.WpsInfo
+import android.net.wifi.p2p.WifiP2pConfig
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pManager
 import android.os.Bundle
@@ -15,10 +17,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.talmir.mickinet.R
 import com.talmir.mickinet.databinding.FragmentDevicesListBinding
 import com.talmir.mickinet.helpers.NearbyDeviceDiscoveryState
 import com.talmir.mickinet.helpers.deviceDetails
+import com.talmir.mickinet.models.DeviceDetails
 import com.talmir.mickinet.repository.Repository
 
 /**
@@ -39,6 +43,22 @@ class DevicesListFragment : Fragment() {
     private lateinit var channel: WifiP2pManager.Channel
     private lateinit var manager: WifiP2pManager
 
+    private fun wifiDirectActionListener(action: () -> Unit) =
+        object : WifiP2pManager.ActionListener {
+            override fun onSuccess() {
+                action()
+            }
+
+            override fun onFailure(reasonCode: Int) {
+                when (reasonCode) {
+                    WifiP2pManager.ERROR -> toast(R.string.discovery_error_1)
+                    WifiP2pManager.P2P_UNSUPPORTED -> toast(R.string.discovery_error_2)
+                    WifiP2pManager.BUSY -> toast(R.string.discovery_error_3)
+                    else -> toast(R.string.discovery_error_4)
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,22 +78,26 @@ class DevicesListFragment : Fragment() {
     ): View? {
         binding = FragmentDevicesListBinding.inflate(inflater, container, false)
 
-        binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.STOPPED
+        binding.devicesListRecyclerView.addItemDecoration(
+            DividerItemDecoration(fragmentActivity, LinearLayoutManager.VERTICAL)
+        )
+        binding.devicesListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0)
+                    binding.startDiscover.hide();
+                else
+                    binding.startDiscover.show();
 
-        binding.button.setOnClickListener {
-            manager.discoverPeers(channel, object : WifiP2pManager.ActionListener {
-                override fun onSuccess() {
-                    binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.STARTED
-                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
-                override fun onFailure(reasonCode: Int) {
-                    when (reasonCode) {
-                        WifiP2pManager.ERROR -> toast(R.string.discovery_error_1)
-                        WifiP2pManager.P2P_UNSUPPORTED -> toast(R.string.discovery_error_2)
-                        WifiP2pManager.BUSY -> toast(R.string.discovery_error_3)
-                        else -> toast(R.string.discovery_error_4)
-                    }
-                }
+        binding.startDiscover.setOnClickListener {
+            it.visibility = View.GONE
+            manager.discoverPeers(channel, wifiDirectActionListener {
+                binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.STARTED
+                showDiscoveredItems()
+                it.visibility = View.VISIBLE
             })
         }
 
@@ -82,19 +106,35 @@ class DevicesListFragment : Fragment() {
                 if (peers.isNotEmpty()) {
                     binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.DISCOVERED
 
-                    binding.devicesListRecyclerView.addItemDecoration(
-                        DividerItemDecoration(fragmentActivity, LinearLayoutManager.VERTICAL)
-                    )
+                    val devicesListItemClickListener = NearbyDevicesListItemClickListener {
+                        val config = WifiP2pConfig()
+                        config.deviceAddress = it
+                        config.wps.setup = WpsInfo.PBC
 
-                    val adapter = DevicesListAdapter()
-                    adapter.submitList(peers.map(WifiP2pDevice::deviceDetails))
-                    binding.devicesListRecyclerView.adapter = adapter
-                } else
+                        manager.connect(channel, config, wifiDirectActionListener {
+                            println("okay :)))")
+                        })
+                    }
+
+                    showDiscoveredItems(devicesListItemClickListener, peers)
+                } else {
+                    println("thisssssssssssssssssss isssssssss spartaaaaaaaaaaaaaaaaaaaa")
                     binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.NOT_FOUND
+                }
             }
         })
 
         return binding.root
+    }
+
+    private fun showDiscoveredItems(
+        clickListener: NearbyDevicesListItemClickListener? = null,
+        peers: List<WifiP2pDevice>? = null) {
+        val adapter = DevicesListAdapter(clickListener)
+        /** transform elements' type from [WifiP2pDevice] to [DeviceDetails] */
+        adapter.submitList(peers?.map(WifiP2pDevice::deviceDetails))
+        /** bind [peers] to recyclerView */
+        binding.devicesListRecyclerView.adapter = adapter
     }
 
     private fun toast(@StringRes what: Int) =

@@ -116,9 +116,9 @@ class Repository private constructor() {
      *
      * @param source a [LiveData] object to register
      */
-    fun addPeerListSource(source: LiveData<Collection<WifiP2pDevice>>) =
+    fun addPeerListSource(source: LiveData<List<WifiP2pDevice>>) =
         mPeerList.addSource(source) {
-            mPeerList.value = it.toList()
+            mPeerList.value = it
         }
 
     /**
@@ -126,7 +126,7 @@ class Repository private constructor() {
      *
      * @param source a [LiveData] source to unsubscribe
      */
-    fun removePeerListSource(source: LiveData<Collection<WifiP2pDevice>>) =
+    fun removePeerListSource(source: LiveData<List<WifiP2pDevice>>) =
         mPeerList.removeSource(source)
     //endregion Peer list related stuff
 }

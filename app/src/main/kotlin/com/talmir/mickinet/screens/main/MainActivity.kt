@@ -6,9 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.talmir.mickinet.R
+import com.talmir.mickinet.background.WifiP2pStateChangeReceiver
 import com.talmir.mickinet.databinding.ActivityMainBinding
 import com.talmir.mickinet.repository.Repository
-import com.talmir.mickinet.background.WifiP2pStateChangeReceiver
 
 /**
  * Entry-point activity.
@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         registerReceiver(wifiDirectBroadcastReceiver, intentFilter)
+
         // add data sources
         Repository.instance().addWifiP2pEnableSource(wifiDirectBroadcastReceiver.isWifiP2pEnabled)
         Repository.instance().addConnectionSource(wifiDirectBroadcastReceiver.isConnected)
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         Repository.instance().removeConnectionSource(wifiDirectBroadcastReceiver.isConnected)
         Repository.instance().removeDeviceInfoSource(wifiDirectBroadcastReceiver.deviceInfo)
         Repository.instance().removePeerListSource(wifiDirectBroadcastReceiver.peerList)
+
         unregisterReceiver(wifiDirectBroadcastReceiver)
     }
 }

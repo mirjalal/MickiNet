@@ -15,8 +15,8 @@ package com.talmir.mickinet.helpers
  * For more information about Enums in Android [visit](https://youtu.be/Hzs6OBcvNQE).
  */
 object NearbyDeviceDiscoveryState {
-    const val STARTED = 0
-    const val STOPPED = 1
+    const val STOPPED = 0
+    const val STARTED = 1
     const val NOT_FOUND = 2
     const val DISCOVERED = 3
 }

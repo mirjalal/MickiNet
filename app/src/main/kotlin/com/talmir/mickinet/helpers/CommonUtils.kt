@@ -10,3 +10,13 @@ import com.talmir.mickinet.models.DeviceDetails
  */
 fun WifiP2pDevice.deviceDetails() =
     DeviceDetails(deviceName, status, deviceAddress)
+
+fun MutableList<WifiP2pDevice>.populateList(another: Collection<WifiP2pDevice>) {
+    if (isEmpty())
+        addAll(another)
+    else {
+        /**
+         * merge [another] with [this] by comparing deviceAddress properties...
+         */
+    }
+}

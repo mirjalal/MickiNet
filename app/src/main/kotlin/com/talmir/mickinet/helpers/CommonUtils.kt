@@ -11,12 +11,26 @@ import com.talmir.mickinet.models.DeviceDetails
 fun WifiP2pDevice.deviceDetails() =
     DeviceDetails(deviceName, status, deviceAddress)
 
+/**
+ * Merges [this] with [another]. If [this] is empty,
+ * then copy all elements from [another] to temp
+ * list and return. Otherwise, check both lists by
+ * their elements' MAC address property. Then, add
+ * non-existing elements to temp list and return it.
+ */
 fun MutableList<WifiP2pDevice>.populateList(another: Collection<WifiP2pDevice>) {
+
+    fun compareAndMerge() {
+        forEach { destElem ->
+            another.forEach { sourceElem ->
+                if (destElem.deviceAddress != sourceElem.deviceAddress)
+                    add(sourceElem)
+            }
+        }
+    }
+
     if (isEmpty())
         addAll(another)
-    else {
-        /**
-         * merge [another] with [this] by comparing deviceAddress properties...
-         */
-    }
+    else
+        compareAndMerge()
 }

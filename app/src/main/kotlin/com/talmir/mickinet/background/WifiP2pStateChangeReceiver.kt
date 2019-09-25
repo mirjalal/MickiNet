@@ -40,6 +40,7 @@ class WifiP2pStateChangeReceiver(
     private val peerListLocalCache = mutableListOf<WifiP2pDevice>()
     private val peerListChangeListener: WifiP2pManager.PeerListListener by lazy {
         WifiP2pManager.PeerListListener {
+            // update list with last discovered devices
             peerListLocalCache.populateList(it.deviceList)
 
             // The peer list has changed. Update LiveData too.

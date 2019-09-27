@@ -62,32 +62,23 @@ fun TextView.bindDeviceMacAddress(macAddress: String) {
 @BindingAdapter("shouldBeVisible")
 fun View.bindVisibility(status: Int) {
     when (status) {
-        NearbyDeviceDiscoveryState.NOT_FOUND -> {
-            if (this is TextView) {
-                text = context.getString(R.string.no_device_found)
-                visibility = View.VISIBLE
-            }
-            if (this is ContentLoadingProgressBar)
-                visibility = View.GONE
-        }
-
         NearbyDeviceDiscoveryState.STARTED -> {
             if (this is TextView)
                 text = context.getString(R.string.discovering_nearby_devices)
             visibility = View.VISIBLE
         }
 
-        NearbyDeviceDiscoveryState.STOPPED -> {
+        NearbyDeviceDiscoveryState.DISCOVERED -> {
+            visibility = View.GONE
+        }
+
+        else -> {
             if (this is TextView) {
                 text = context.getString(R.string.no_device_found)
                 visibility = View.VISIBLE
             }
             if (this is ContentLoadingProgressBar)
                 visibility = View.GONE
-        }
-
-        NearbyDeviceDiscoveryState.DISCOVERED -> {
-            visibility = View.GONE
         }
     }
 }

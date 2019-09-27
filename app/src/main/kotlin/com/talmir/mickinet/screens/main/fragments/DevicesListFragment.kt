@@ -83,10 +83,10 @@ class DevicesListFragment : Fragment() {
         )
         binding.devicesListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0)
-                    binding.startDiscover.hide();
-                else
-                    binding.startDiscover.show();
+                when {
+                    dy > 0 -> binding.startDiscover.hide()
+                    else -> binding.startDiscover.show()
+                }
 
                 super.onScrolled(recyclerView, dx, dy)
             }

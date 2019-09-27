@@ -13,13 +13,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.talmir.mickinet.R
 import com.talmir.mickinet.databinding.FragmentDevicesListBinding
+import com.talmir.mickinet.decorator.CustomFragment
 import com.talmir.mickinet.helpers.NearbyDeviceDiscoveryState
 import com.talmir.mickinet.helpers.deviceDetails
 import com.talmir.mickinet.models.DeviceDetails
@@ -36,8 +36,8 @@ import com.talmir.mickinet.repository.Repository
  * broadcast receiver class.
  * For more information please look at UML diagram.
  */
-class DevicesListFragment : Fragment() {
-    private lateinit var fragmentActivity: FragmentActivity
+class DevicesListFragment : CustomFragment() {
+
     private lateinit var binding: FragmentDevicesListBinding
 
     private lateinit var channel: WifiP2pManager.Channel
@@ -45,18 +45,15 @@ class DevicesListFragment : Fragment() {
 
     private fun wifiDirectActionListener(action: () -> Unit) =
         object : WifiP2pManager.ActionListener {
-            override fun onSuccess() {
-                action()
-            }
+            override fun onSuccess() = action()
 
-            override fun onFailure(reasonCode: Int) {
+            override fun onFailure(reasonCode: Int) =
                 when (reasonCode) {
                     WifiP2pManager.ERROR -> toast(R.string.discovery_error_1)
                     WifiP2pManager.P2P_UNSUPPORTED -> toast(R.string.discovery_error_2)
                     WifiP2pManager.BUSY -> toast(R.string.discovery_error_3)
                     else -> toast(R.string.discovery_error_4)
                 }
-            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,16 +63,7 @@ class DevicesListFragment : Fragment() {
         channel = manager.initialize(fragmentActivity, getMainLooper(), null)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        fragmentActivity = context as FragmentActivity
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDevicesListBinding.inflate(inflater, container, false)
 
         binding.devicesListRecyclerView.addItemDecoration(
@@ -92,6 +80,7 @@ class DevicesListFragment : Fragment() {
             }
         })
 
+        val discoveryState = NearbyDeviceDiscoveryState.STOPPED
         binding.startDiscover.setOnClickListener {
             it.visibility = View.GONE
             manager.discoverPeers(channel, wifiDirectActionListener {
@@ -106,9 +95,9 @@ class DevicesListFragment : Fragment() {
                 if (peers.isNotEmpty()) {
                     binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.DISCOVERED
 
-                    val devicesListItemClickListener = NearbyDevicesListItemClickListener {
+                    val devicesListItemClickListener = NearbyDevicesListItemClickListener { macAddress ->
                         val config = WifiP2pConfig()
-                        config.deviceAddress = it
+                        config.deviceAddress = macAddress
                         config.wps.setup = WpsInfo.PBC
 
                         manager.connect(channel, config, wifiDirectActionListener {

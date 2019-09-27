@@ -8,12 +8,25 @@
 <!--    <color name="secondaryDarkColor">#9a0007</color>-->
 <!--    <color name="primaryTextColor">#000000</color>-->
 <!--    <color name="secondaryTextColor">#ffffff</color>-->
-    <color name="primaryColor">#331321</color>
-    <color name="primaryLightColor">#5e3a48</color>
-    <color name="primaryDarkColor">#331321</color>
-    <color name="secondaryColor">#546e7a</color>
-    <color name="secondaryLightColor">#819ca9</color>
-    <color name="secondaryDarkColor">#29434e</color>
-    <color name="primaryTextColor">#121212</color>
-    <color name="secondaryTextColor">#ffffff</color>
+
+<!--    <color name="primaryColor">#331321</color>-->
+<!--    <color name="primaryLightColor">#5e3a48</color>-->
+<!--    <color name="primaryDarkColor">#331321</color>-->
+<!--    <color name="secondaryColor">#546e7a</color>-->
+<!--    <color name="secondaryLightColor">#819ca9</color>-->
+<!--    <color name="secondaryDarkColor">#29434e</color>-->
+<!--    <color name="primaryTextColor">#121212</color>-->
+<!--    <color name="secondaryTextColor">#ffffff</color>-->
+
+<!--  192943 567095 4dada1 dark normal accent  -->
+<!--  aec8e9 226868 4cbbab primary light secondary dark secondary light  -->
+
+    <color name="primaryColor">#455878</color>
+    <color name="primaryLightColor">#aec8e9</color> <!-- #569aea material recommended color -->
+    <color name="primaryDarkColor">#3c4c68</color> <!-- #004287 material recommended color -->
+    <color name="secondaryColor">#4dada1</color>
+    <color name="secondaryLightColor">#4cbbab</color>
+    <color name="secondaryDarkColor">#226868</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#006cb7</color>
 </resources>

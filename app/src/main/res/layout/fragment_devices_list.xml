@@ -62,7 +62,7 @@
             android:id="@+id/start_discover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_search_nearby_devices"
+            app:imageResourceByState="@{nearbyDeviceDiscoverStatus}"
             app:tint="#FFFFFF"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

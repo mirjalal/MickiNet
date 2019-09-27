@@ -1,6 +1,5 @@
 package com.talmir.mickinet.screens.main.fragments
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
@@ -10,27 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.talmir.mickinet.R
 import com.talmir.mickinet.databinding.DeviceNameChangeLayoutBinding
 import com.talmir.mickinet.databinding.FragmentDeviceDetailsBinding
+import com.talmir.mickinet.decorator.CustomFragment
 import com.talmir.mickinet.helpers.DeviceNameChangerUtil
 import com.talmir.mickinet.repository.Repository
 
 /**
  * A [Fragment] subclass to show user's device information in main page.
  */
-class DeviceDetailFragment : Fragment() {
+class DeviceDetailFragment : CustomFragment() {
 
-    private lateinit var fragmentActivity: FragmentActivity
     private lateinit var binding: FragmentDeviceDetailsBinding
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        fragmentActivity = context as FragmentActivity
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDeviceDetailsBinding.inflate(inflater, container, false)

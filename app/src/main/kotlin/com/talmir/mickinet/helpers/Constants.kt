@@ -17,6 +17,6 @@ package com.talmir.mickinet.helpers
 object NearbyDeviceDiscoveryState {
     const val STOPPED = 0
     const val STARTED = 1
-    const val NOT_FOUND = 2
-    const val DISCOVERED = 3
+    const val NOT_FOUND = STOPPED
+    const val DISCOVERED = STOPPED
 }

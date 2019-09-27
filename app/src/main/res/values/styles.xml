@@ -7,14 +7,14 @@
         <item name="colorAccent">@color/secondaryLightColor</item>
 <!--        <item name="android:textColorPrimary">@color/primaryTextColor</item>-->
 <!--        <item name="android:textColorSecondary">@color/secondaryTextColor</item>-->
-        <item name="android:fontFamily">@font/raleway</item>
-        <item name="fontFamily">@font/raleway</item>
+        <item name="android:fontFamily">@font/samsung_sans_regular</item>
+        <item name="fontFamily">@font/samsung_sans_regular</item>
     </style>
 
     <style name="BoldTextStyle">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/raleway_bold</item>
-        <item name="fontFamily">@font/raleway_bold</item>
+<!--        <item name="android:textStyle">bold</item>-->
+        <item name="android:fontFamily">@font/samsung_sans_bold</item>
+        <item name="fontFamily">@font/samsung_sans_bold</item>
     </style>
 
     <style name="BoldBigTextStyle" parent="BoldTextStyle">
@@ -23,8 +23,8 @@
 
     <style name="ItalicTextStyle">
         <item name="android:textStyle">italic</item>
-        <item name="android:fontFamily">@font/raleway_italic</item>
-        <item name="fontFamily">@font/raleway_italic</item>
+        <item name="android:fontFamily">@font/samsung_sans_regular</item>
+        <item name="fontFamily">@font/samsung_sans_regular</item>
     </style>
 
     <style name="ItalicBigTextStyle" parent="ItalicTextStyle">

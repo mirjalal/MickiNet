@@ -16,7 +16,7 @@ import static android.os.Looper.getMainLooper;
  * of the device. Since, Kotlin implementation of the following
  * lines is quite possible. However, during Kotlin code execution
  * I got a cryptic error. To reduce searching time for that error
- * and also to keep the {{@link com.talmir.mickinet.screens.main.fragments.DeviceDetailFragment}}
+ * and also to keep the {@link com.talmir.mickinet.screens.main.fragments.DeviceDetailFragment}
  * class a bit more clean, I decided to keep that codes in Java...
  *
  * @author mirjalal

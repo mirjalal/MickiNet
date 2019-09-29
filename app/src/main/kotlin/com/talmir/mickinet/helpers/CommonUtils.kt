@@ -1,6 +1,8 @@
 package com.talmir.mickinet.helpers
 
+import android.content.Context
 import android.net.wifi.p2p.WifiP2pDevice
+import androidx.core.content.edit
 import com.talmir.mickinet.models.DeviceDetails
 
 /**
@@ -21,12 +23,13 @@ fun WifiP2pDevice.deviceDetails() =
 fun MutableList<WifiP2pDevice>.populateList(another: Collection<WifiP2pDevice>) {
 
     fun compareAndMerge() {
-        forEach { destElem ->
-            another.forEach { sourceElem ->
-                if (destElem.deviceAddress != sourceElem.deviceAddress)
-                    add(sourceElem)
+        if (!another.isNullOrEmpty())
+            forEach { destElem ->
+                another.forEach { sourceElem ->
+                    if (destElem.deviceAddress != sourceElem.deviceAddress)
+                        add(sourceElem)
+                }
             }
-        }
     }
 
     if (isEmpty())

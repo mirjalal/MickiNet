@@ -5,6 +5,7 @@ import android.net.wifi.WpsInfo
 import android.net.wifi.p2p.WifiP2pConfig
 import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pManager
+import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo
 import android.os.Bundle
 import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
@@ -80,14 +81,16 @@ class DevicesListFragment : CustomFragment() {
             }
         })
 
-        val discoveryState = NearbyDeviceDiscoveryState.STOPPED
+        // TODO: burdaki logici duzelt status ucun
         binding.startDiscover.setOnClickListener {
-            it.visibility = View.GONE
-            manager.discoverPeers(channel, wifiDirectActionListener {
+            if (binding.nearbyDeviceDiscoverStatus == null ||
+                binding.nearbyDeviceDiscoverStatus != NearbyDeviceDiscoveryState.STARTED) {
                 binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.STARTED
-                showDiscoveredItems()
-                it.visibility = View.VISIBLE
-            })
+                manager.discoverPeers(channel, wifiDirectActionListener {
+                    showDiscoveredItems()
+                })
+            } else
+                stopPeerDiscovery()
         }
 
         Repository.instance().peerList.observe(fragmentActivity, Observer {
@@ -101,6 +104,15 @@ class DevicesListFragment : CustomFragment() {
                         config.wps.setup = WpsInfo.PBC
 
                         manager.connect(channel, config, wifiDirectActionListener {
+                            /**
+                             * first thing first, check if peer discovery
+                             * had already been stopped or not. If yes,
+                             * execute, otherwise bypass the following line.
+                             */
+                            if (binding.nearbyDeviceDiscoverStatus == NearbyDeviceDiscoveryState.STARTED ||
+                                binding.nearbyDeviceDiscoverStatus == NearbyDeviceDiscoveryState.DISCOVERED)
+                                stopPeerDiscovery()
+
                             println("okay :)))")
                         })
                     }
@@ -108,7 +120,7 @@ class DevicesListFragment : CustomFragment() {
                     showDiscoveredItems(devicesListItemClickListener, peers)
                 } else {
                     println("thisssssssssssssssssss isssssssss spartaaaaaaaaaaaaaaaaaaaa")
-                    binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.NOT_FOUND
+                    binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.NOT_ANY
                 }
             }
         })
@@ -125,6 +137,12 @@ class DevicesListFragment : CustomFragment() {
         /** bind [peers] to recyclerView */
         binding.devicesListRecyclerView.adapter = adapter
     }
+
+    private fun stopPeerDiscovery() =
+        // TODO: must be tested.
+        manager.stopPeerDiscovery(channel, wifiDirectActionListener {
+            binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.STOPPED
+        })
 
     private fun toast(@StringRes what: Int) =
         Toast.makeText(fragmentActivity, what, Toast.LENGTH_LONG).show()

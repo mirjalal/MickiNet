@@ -85,9 +85,9 @@ dependencies {
 
     // ViewModelProviders
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle"
-    // ViewModel https://developer.android.com/topic/libraries/architecture/coroutines
+    // LiveData https://developer.android.com/topic/libraries/architecture/coroutines
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha05"
-    // LiveData
+    // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
 
     // Room

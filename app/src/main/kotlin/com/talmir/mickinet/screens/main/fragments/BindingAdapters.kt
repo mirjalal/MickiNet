@@ -85,10 +85,14 @@ fun View.bindVisibility(state: Int) {
     }
 }
 
+/**
+ * Binds image resource by [state].
+ */
 @BindingAdapter("imageResourceByState")
 fun FloatingActionButton.bindImageResourceByState(state: Int) {
     when (state) {
-        NearbyDeviceDiscoveryState.STARTED -> setImageResource(R.drawable.ic_stop_discovery)
+        NearbyDeviceDiscoveryState.STARTED,
+        NearbyDeviceDiscoveryState.DISCOVERED -> setImageResource(R.drawable.ic_stop_discovery)
         else -> setImageResource(R.drawable.ic_start_discovery)
     }
 }

@@ -3,7 +3,6 @@ package com.talmir.mickinet.screens.main.fragments
 import android.content.Context
 import android.net.wifi.p2p.WifiP2pDevice
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.widget.ContentLoadingProgressBar
@@ -64,13 +63,21 @@ fun TextView.bindDeviceMacAddress(macAddress: String) {
 @BindingAdapter("shouldBeVisible")
 fun View.bindVisibility(state: Int) {
     when (state) {
-        NearbyDeviceDiscoveryState.STARTED -> {
+        NearbyDeviceDiscoveryState.USER_STARTED -> {
             if (this is TextView)
                 text = context.getString(R.string.discovering_nearby_devices)
             visibility = View.VISIBLE
         }
 
         NearbyDeviceDiscoveryState.DISCOVERED -> {
+            if (this is TextView)
+                visibility = View.GONE
+            if (this is ContentLoadingProgressBar)
+                visibility = View.VISIBLE
+        }
+
+        NearbyDeviceDiscoveryState.DEVICE_FOUND,
+        NearbyDeviceDiscoveryState.USER_STOPPED -> {
             visibility = View.GONE
         }
 
@@ -86,12 +93,12 @@ fun View.bindVisibility(state: Int) {
 }
 
 /**
- * Binds image resource by [state].
+ * Binds [FloatingActionButton] image resource by [state].
  */
 @BindingAdapter("imageResourceByState")
 fun FloatingActionButton.bindImageResourceByState(state: Int) {
     when (state) {
-        NearbyDeviceDiscoveryState.STARTED,
+        NearbyDeviceDiscoveryState.USER_STARTED,
         NearbyDeviceDiscoveryState.DISCOVERED -> setImageResource(R.drawable.ic_stop_discovery)
         else -> setImageResource(R.drawable.ic_start_discovery)
     }

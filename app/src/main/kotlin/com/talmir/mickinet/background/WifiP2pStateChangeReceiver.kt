@@ -37,7 +37,7 @@ class WifiP2pStateChangeReceiver(
     }
     val deviceInfo: LiveData<DeviceDetails> = _deviceInfo
 
-    private val peerListLocalCache = mutableListOf<WifiP2pDevice>()
+    private var peerListLocalCache = mutableListOf<WifiP2pDevice>()
     private val peerListChangeListener: WifiP2pManager.PeerListListener by lazy {
         WifiP2pManager.PeerListListener {
             // update list with last discovered devices
@@ -77,8 +77,9 @@ class WifiP2pStateChangeReceiver(
                 if (activeNetwork != null) {
                     // connected to the internet
                     if (activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
-                        // connected to wifi direct
-                        println("SUCCESS!! CONNECTED TO OTHER DEVICE.")
+                        if (activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_WIFI_P2P))
+                            // connected to wifi direct
+                            println("SUCCESS!! CONNECTED TO OTHER DEVICE.")
                     } else {
                         println("COULD NOT CONNECT TO OTHER DEVICE!")
                     }

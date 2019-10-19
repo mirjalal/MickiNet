@@ -81,11 +81,11 @@ class DevicesListFragment : CustomFragment() {
         })
 
         binding.startDiscover.setOnClickListener {
-            if (binding.nearbyDeviceDiscoverStatus == NearbyDeviceDiscoveryState.USER_STARTED) // if discovery started but no any device found
+            if (binding.nearbyDeviceDiscoverStatus == NearbyDeviceDiscoveryState.USER_STARTED)    // if discovery started but no any device found and user cancelled discovery
                 stopPeerDiscovery(NearbyDeviceDiscoveryState.NO_ANY)
-            else if (binding.nearbyDeviceDiscoverStatus == NearbyDeviceDiscoveryState.DISCOVERED)
+            else if (binding.nearbyDeviceDiscoverStatus == NearbyDeviceDiscoveryState.DISCOVERED) // devices found and user cancelled discovery
                 stopPeerDiscovery(NearbyDeviceDiscoveryState.USER_STOPPED)
-            else
+            else                                                                                  // user started discovery
                 manager.discoverPeers(channel, wifiDirectActionListener {
                     binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.USER_STARTED
                     showDiscoveredItems()
@@ -98,15 +98,17 @@ class DevicesListFragment : CustomFragment() {
                     /**
                      * check if proper setting is active or not.
                      * depending on it, set status to DISCOVERED
-                     * or DEVICE_FOUND.
+                     * or [stopPeerDiscovery] with DEVICE_FOUND
+                     * status code.
                      */
                     binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.DISCOVERED
-//                    binding.nearbyDev iceDiscoverStatus = NearbyDeviceDiscoveryState.DEVICE_FOUND
+                    //stopPeerDiscovery(NearbyDeviceDiscoveryState.DEVICE_FOUND)
 
                     val devicesListItemClickListener = NearbyDevicesListItemClickListener { macAddress ->
-                        val config = WifiP2pConfig()
-                        config.deviceAddress = macAddress
-                        config.wps.setup = WpsInfo.PBC
+                        val config = WifiP2pConfig().apply {
+                            deviceAddress = macAddress
+                            wps.setup = WpsInfo.PBC
+                        }
 
                         manager.connect(channel, config, wifiDirectActionListener {
                             /**
@@ -125,7 +127,8 @@ class DevicesListFragment : CustomFragment() {
 
                     showDiscoveredItems(devicesListItemClickListener, peers)
                 } else
-                    binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.NO_ANY
+                    if (binding.nearbyDeviceDiscoverStatus != NearbyDeviceDiscoveryState.USER_STOPPED) //
+                        binding.nearbyDeviceDiscoverStatus = NearbyDeviceDiscoveryState.NO_ANY
             }
         })
 
@@ -142,10 +145,12 @@ class DevicesListFragment : CustomFragment() {
         binding.devicesListRecyclerView.adapter = adapter
     }
 
-    private fun stopPeerDiscovery(status: Int) =
+    private fun stopPeerDiscovery(status: Int) {
+        println(status)
         manager.stopPeerDiscovery(channel, wifiDirectActionListener {
             binding.nearbyDeviceDiscoverStatus = status
         })
+    }
 
     private fun toast(@StringRes what: Int) =
         Toast.makeText(fragmentActivity, what, Toast.LENGTH_LONG).show()

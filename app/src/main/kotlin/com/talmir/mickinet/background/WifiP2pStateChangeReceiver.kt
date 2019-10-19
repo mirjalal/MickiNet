@@ -6,11 +6,11 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.wifi.p2p.WifiP2pDevice
+import android.net.wifi.p2p.WifiP2pGroup
 import android.net.wifi.p2p.WifiP2pManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.talmir.mickinet.helpers.deviceDetails
-import com.talmir.mickinet.helpers.populateList
 import com.talmir.mickinet.models.DeviceDetails
 
 /**
@@ -37,11 +37,18 @@ class WifiP2pStateChangeReceiver(
     }
     val deviceInfo: LiveData<DeviceDetails> = _deviceInfo
 
-    private var peerListLocalCache = mutableListOf<WifiP2pDevice>()
+    private val peerListLocalCache = mutableListOf<WifiP2pDevice>()
     private val peerListChangeListener: WifiP2pManager.PeerListListener by lazy {
         WifiP2pManager.PeerListListener {
-            // update list with last discovered devices
-            peerListLocalCache.populateList(it.deviceList)
+            val discoveredDevices = it.deviceList
+
+            if (peerListLocalCache.isEmpty())
+                peerListLocalCache.addAll(discoveredDevices)
+
+            if (peerListLocalCache != discoveredDevices) {
+                peerListLocalCache.clear()
+                peerListLocalCache.addAll(discoveredDevices)
+            }
 
             // The peer list has changed. Update LiveData too.
             _peerList.postValue(peerListLocalCache)
